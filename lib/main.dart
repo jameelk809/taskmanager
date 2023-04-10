@@ -94,10 +94,6 @@ class _TodoListState extends State<TodoList> {
                   }
                 },
               ),
-              // TextField(
-              //   decoration: InputDecoration(labelText: 'Due date'),
-              //   onChanged: (value) => dueDate = value,
-              // ),
               DropdownButton<IconData>(
                 value: icon,
                 onChanged: (value) => icon = value!,
@@ -148,15 +144,12 @@ class _TodoListState extends State<TodoList> {
         );
       },
     );
-
     if (newTodo != null) {
       setState(() {
         _todos.add(newTodo);
       });
     }
   }
-
-
 
   void _removeTodo(int index) {
     setState(() {
@@ -177,18 +170,18 @@ class _TodoListState extends State<TodoList> {
       actionPane: const SlidableDrawerActionPane(),
       actions: <Widget>[
         IconSlideAction(
-          caption: 'Done',
-          color: Colors.green,
-          icon: Icons.done,
-          onTap: () => _markAsDone(index),
-        ),
-      ],
-      secondaryActions: <Widget>[
-        IconSlideAction(
           caption: 'Delete',
           color: Colors.red,
           icon: Icons.delete,
           onTap: () => _removeTodo(index),
+        ),
+      ],
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          caption: 'Done',
+          color: Colors.green,
+          icon: Icons.done,
+          onTap: () => _markAsDone(index),
         ),
       ],
       child: ListTile(
@@ -210,7 +203,7 @@ class _TodoListState extends State<TodoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Task Manager App'),
+        title: const Text('Task Manager App'),
       ),
       body: ListView.builder(
         itemBuilder: _buildTodoItem,
