@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,26 +21,27 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
+  TextEditingController dateInputController = TextEditingController();
   final List<Todo> _todos = [
     Todo(
         title: 'Todo',
         description: 'Do something important',
-        dueDate: 'April 15th, 2023',
+        dueDate: '15 April 2023',
         icon: Icons.check_circle),
     Todo(
         title: 'Email',
         description: 'Send an important email',
-        dueDate: 'April 16th, 2023',
+        dueDate: '16 April 2023',
         icon: Icons.email),
     Todo(
         title: 'Phone',
         description: 'Make an important phone call',
-        dueDate: 'April 17th, 2023',
+        dueDate: '17 April 2023',
         icon: Icons.phone),
     Todo(
         title: 'Meeting',
         description: 'Attend an important meeting',
-        dueDate: 'April 18th, 2023',
+        dueDate: '18 April 2023',
         icon: Icons.people),
   ];
 
@@ -66,10 +68,36 @@ class _TodoListState extends State<TodoList> {
                 decoration: InputDecoration(labelText: 'Description'),
                 onChanged: (value) => description = value,
               ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Due date'),
-                onChanged: (value) => dueDate = value,
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Date',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 1)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 1)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue, width: 1)),
+                ),
+                controller: dateInputController,
+                readOnly: true,
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2050));
+
+                  if (pickedDate != null) {
+                    dateInputController.text =
+                        DateFormat('dd MMMM yyyy').format(pickedDate);
+                    dueDate = dateInputController.text;
+                  }
+                },
               ),
+              // TextField(
+              //   decoration: InputDecoration(labelText: 'Due date'),
+              //   onChanged: (value) => dueDate = value,
+              // ),
               DropdownButton<IconData>(
                 value: icon,
                 onChanged: (value) => icon = value!,
