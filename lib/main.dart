@@ -212,7 +212,7 @@ class _TodoListState extends State<TodoList> {
       floatingActionButton: FloatingActionButton(
         onPressed: _addTodo,
         tooltip: 'Add Todo',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -235,26 +235,38 @@ class Todo {
 
 class TodoDetails extends StatelessWidget {
   final Todo todo;
-
-  TodoDetails({required this.todo});
-
+  const TodoDetails({super.key, required this.todo});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(todo.title),
+        // title: Text(todo.title),
+        title: const Text('Task Details'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Row( // Add a Row for icon and title
+              children: <Widget>[
+                Icon(todo.icon), // Display the icon here
+                const SizedBox(width: 32.0), // Add spacing between icon and title
+                Text(
+                  todo.title,
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+
+            SizedBox(height: 16.0),
             const Text(
               'Description',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8.0),
             Text(todo.description),
+
             SizedBox(height: 16.0),
             const Text(
               'Due Date',
@@ -262,6 +274,7 @@ class TodoDetails extends StatelessWidget {
             ),
             SizedBox(height: 8.0),
             Text(todo.dueDate),
+
             SizedBox(height: 16.0),
             const Text(
               'Status',
@@ -275,4 +288,3 @@ class TodoDetails extends StatelessWidget {
     );
   }
 }
-
