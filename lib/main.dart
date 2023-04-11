@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Task Manager App',
+      title: 'Task Manager',
       home: TodoList(),
     );
   }
@@ -55,7 +55,7 @@ class _TodoListState extends State<TodoList> {
         IconData icon = Icons.check_box_outline_blank;
 
         return AlertDialog(
-          title: Text('New Task'),
+          title: const Text('New Task'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,7 +203,7 @@ class _TodoListState extends State<TodoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Task Manager App'),
+        title: const Text('Task Manager'),
       ),
       body: ListView.builder(
         itemBuilder: _buildTodoItem,
@@ -240,7 +240,6 @@ class TodoDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Text(todo.title),
         title: const Text('Task Details'),
       ),
       body: Padding(
