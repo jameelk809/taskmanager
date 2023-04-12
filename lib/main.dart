@@ -22,7 +22,10 @@ class TodoList extends StatefulWidget {
 
 class _TodoListState extends State<TodoList> {
   TextEditingController dateInputController = TextEditingController();
+  IconData? selectedIcon; // Define a nullable IconData variable to hold the selected icon
   final List<Todo> _todos = [
+    //  to see a blank screen at start-up, comment the below 4 Todo items.
+    //  I have just added them for debugging purpose
     Todo(
         title: 'Todo',
         description: 'Do something important',
@@ -61,11 +64,11 @@ class _TodoListState extends State<TodoList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextField(
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(labelText: 'Title'),
                 onChanged: (value) => title = value,
               ),
               TextField(
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: const InputDecoration(labelText: 'Description'),
                 onChanged: (value) => description = value,
               ),
               TextFormField(
@@ -94,33 +97,110 @@ class _TodoListState extends State<TodoList> {
                   }
                 },
               ),
+
               DropdownButton<IconData>(
                 value: icon,
                 onChanged: (value) => icon = value!,
-                items: const [
+                items: [
                   DropdownMenuItem(
                     value: Icons.check_box_outline_blank,
-                    child: Icon(Icons.check_box_outline_blank),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.check_box_outline_blank),
+                        SizedBox(width: 8.0),
+                        Text("Check Box"),
+                      ],
+                    ),
                   ),
                   DropdownMenuItem(
                     value: Icons.email,
-                    child: Icon(Icons.email),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.email),
+                        SizedBox(width: 8.0),
+                        Text("Email"),
+                      ],
+                    ),
                   ),
                   DropdownMenuItem(
                     value: Icons.phone,
-                    child: Icon(Icons.phone),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.phone),
+                        SizedBox(width: 8.0),
+                        Text("Phone"),
+                      ],
+                    ),
                   ),
                   DropdownMenuItem(
                     value: Icons.calendar_today,
-                    child: Icon(Icons.calendar_today),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.calendar_today),
+                        SizedBox(width: 8.0),
+                        Text("Calendar"),
+                      ],
+                    ),
                   ),
                   DropdownMenuItem(
                     value: Icons.gamepad_outlined,
-                    child: Icon(Icons.gamepad_outlined),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.gamepad_outlined),
+                        SizedBox(width: 8.0),
+                        Text("Gamepad"),
+                      ],
+                    ),
                   ),
                   DropdownMenuItem(
                     value: Icons.sports_soccer,
-                    child: Icon(Icons.sports_soccer),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.sports_soccer),
+                        SizedBox(width: 8.0),
+                        Text("Soccer"),
+                      ],
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: Icons.list_alt,
+                    child: Row(
+                      children: const [
+                        Icon(Icons.list_alt),
+                        SizedBox(width: 8.0),
+                        Text("List"),
+                      ],
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: Icons.money,
+                    child: Row(
+                      children: const [
+                        Icon(Icons.money),
+                        SizedBox(width: 8.0),
+                        Text("Money"),
+                      ],
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: Icons.shopping_cart,
+                    child: Row(
+                      children: const [
+                        Icon(Icons.shopping_cart),
+                        SizedBox(width: 8.0),
+                        Text("Shopping"),
+                      ],
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: Icons.work,
+                    child: Row(
+                      children: const [
+                        Icon(Icons.work),
+                        SizedBox(width: 8.0),
+                        Text("Work"),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -128,11 +208,11 @@ class _TodoListState extends State<TodoList> {
           ),
           actions: [
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () => Navigator.of(context).pop(),
             ),
             ElevatedButton(
-              child: Text('Add'),
+              child: const Text('Add'),
               onPressed: () => Navigator.of(context).pop(Todo(
                 title: title,
                 description: description,
@@ -253,33 +333,33 @@ class TodoDetails extends StatelessWidget {
                 const SizedBox(width: 32.0), // Add spacing between icon and title
                 Text(
                   todo.title,
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
 
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             const Text(
               'Description',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(todo.description),
 
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             const Text(
               'Due Date',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(todo.dueDate),
 
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             const Text(
               'Status',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(todo.done ? 'Done' : 'Not done'),
           ],
         ),
